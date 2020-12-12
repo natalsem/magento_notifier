@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="natalsem" sortOrder="999" translate="label">
+			<label>NS</label>
+		</tab>
+		<section id="notification" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Notification</label>
+			<tab>notification</tab>
+			<resource>Natalsem_Notification::config</resource>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>General</label>
+                <field id="is_active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="channel" translate="label comment" type="select" sortOrder="20" showInDefault="1">
+                    <label>Notification enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="channel" translate="label comment" type="select" sortOrder="30" showInDefault="1">
+                    <label>Select messenger</label>
+                    <source_model>Natalsem\Notification\Model\Source\EventListOptions</source_model>
+                </field>
+                <field id="events" translate="label comment" type="multiselect" sortOrder="80" showInDefault="1">
+                    <label>Select events</label>
+                    <source_model>Natalsem\Notification\Model\Source\EventListOptions</source_model>
+                </field>
+			</group>
+			<group id="messages" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Messages</label>
+                <field id="place_order" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order placing message</label>
+                    <comment>You can user placeholder {ORDER_ID} for order number</comment>
+                </field>
+                <field id="shipment_created" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Shipment message</label>
+                    <comment>You can user placeholder {ORDER_ID} for order number and {TRACK} for track number</comment>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>
