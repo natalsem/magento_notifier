@@ -1,5 +1,11 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
 	<default>
+        <notification>
+            <messages>
+                <checkout_submit_all_after>Your order number is {ORDER_ID}</checkout_submit_all_after>
+                <shipment_created>Order {ORDER_ID} has been shipped. Tracking number {TRACK}</shipment_created>
+            </messages>
+        </notification>
 	</default>
 </config>

@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
 	<system>
-		<tab id="natalsem" sortOrder="999" translate="label">
+		<tab id="natalsem" sortOrder="500" translate="label">
 			<label>NS</label>
 		</tab>
 		<section id="notification" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
 			<label>Notification</label>
-			<tab>notification</tab>
+			<tab>natalsem</tab>
 			<resource>Natalsem_Notification::config</resource>
 			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
 				<label>General</label>
@@ -14,13 +14,9 @@
                     <label>Notification enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="channel" translate="label comment" type="select" sortOrder="20" showInDefault="1">
-                    <label>Notification enabled</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="channel" translate="label comment" type="select" sortOrder="30" showInDefault="1">
+                <field id="messenger" translate="label comment" type="select" sortOrder="30" showInDefault="1">
                     <label>Select messenger</label>
-                    <source_model>Natalsem\Notification\Model\Source\EventListOptions</source_model>
+                    <source_model>Natalsem\Notification\Model\Source\MessengerListOptions</source_model>
                 </field>
                 <field id="events" translate="label comment" type="multiselect" sortOrder="80" showInDefault="1">
                     <label>Select events</label>
@@ -29,7 +25,7 @@
 			</group>
 			<group id="messages" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
 				<label>Messages</label>
-                <field id="place_order" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="checkout_submit_all_after" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Order placing message</label>
                     <comment>You can user placeholder {ORDER_ID} for order number</comment>
                 </field>

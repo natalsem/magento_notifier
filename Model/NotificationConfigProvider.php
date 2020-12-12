@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Natalsem\Notification\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Tests\NamingConvention\true\string;
 use Natalsem\Notification\Api\NotificationConfigProviderInterface;
 
 /**
@@ -43,19 +44,29 @@ class NotificationConfigProvider implements NotificationConfigProviderInterface
 
     public function getEventList(): array
     {
-        return [];
+        return $this->scopeConfig->getValue(self::XML_PATH_CONFIG_EVENTS_LIST);
     }
 
-    public function getMessageByEvent($event): array
+    /**
+     * Get message by event name
+     *
+     * @param $eventName
+     *
+     * @return string
+     */
+    public function getMessageByEvent(string $eventName): string
     {
-        // TODO: Implement getMessageByEvent() method.
+        $path = self::XML_PATH_CONFIG_GROUP_MESSAGES . $eventName;
+        $message = (string) $this->scopeConfig->getValue($path);
+
+        return $message;
     }
 
-    public function isEventActive(string $event): bool
+    public function isEventActive(string $eventName): bool
     {
         $eventsList = $this->getEventList();
 
-        return in_array($event, $eventsList);
+        return in_array($eventName, $eventsList);
     }
 
 

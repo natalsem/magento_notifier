@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Natalsem\Notification\Model\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
+use Natalsem\Notification\Observer\OrderPlaceAfter;
 
 /**
  * Class EventListOptions
@@ -43,8 +44,8 @@ class EventListOptions implements OptionSourceInterface
     private function getOptionsArray(): array
     {
         return [
-            'order_place' => 'Placing Order',
-            'shipment_created' => 'Order has been shipped',
+            OrderPlaceAfter::EVENT_NAME => OrderPlaceAfter::EVENT_NAME_LABEL,
+            'shipment_created' => 'Order shipment created',
             'forgot_password' => 'Password change request',
         ];
     }
