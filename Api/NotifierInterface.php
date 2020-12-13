@@ -6,8 +6,6 @@ declare(strict_types=1);
 
 namespace Natalsem\Notification\Api;
 
-use Magento\Tests\NamingConvention\true\string;
-
 /**
  * Interface NotifierInterface
  *
@@ -18,8 +16,8 @@ interface NotifierInterface
     /**
      * Send message
      *
-     * @param string $message
+     * @param string $messageText
      * @param string $number
      */
-    public function sendMessage(string $message, string $number): void;
+    public function sendMessage(string $messageText, string $number): void;
 }

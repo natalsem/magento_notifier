@@ -14,7 +14,11 @@
                     <label>Notification enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="messenger" translate="label comment" type="select" sortOrder="30" showInDefault="1">
+                <field id="log" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable request logger</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="method" translate="label comment" type="select" sortOrder="30" showInDefault="1">
                     <label>Select messenger</label>
                     <source_model>Natalsem\Notification\Model\Source\MessengerListOptions</source_model>
                 </field>
@@ -29,7 +33,7 @@
                     <label>Order placing message</label>
                     <comment>You can user placeholder {ORDER_ID} for order number</comment>
                 </field>
-                <field id="shipment_created" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="sales_order_shipment_save_after" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Order Shipment message</label>
                     <comment>You can user placeholder {ORDER_ID} for order number and {TRACK} for track number</comment>
                 </field>

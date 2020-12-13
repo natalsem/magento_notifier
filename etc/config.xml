@@ -4,7 +4,7 @@
         <notification>
             <messages>
                 <checkout_submit_all_after>Your order number is {ORDER_ID}</checkout_submit_all_after>
-                <shipment_created>Order {ORDER_ID} has been shipped. Tracking number {TRACK}</shipment_created>
+                <sales_order_shipment_save_after>Order {ORDER_ID} has been shipped. Tracking information {TRACK}</sales_order_shipment_save_after>
             </messages>
         </notification>
 	</default>

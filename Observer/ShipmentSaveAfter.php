@@ -10,7 +10,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\ShipmentInterface;
-use Magento\Tests\NamingConvention\true\string;
 use Natalsem\Notification\Api\NotificationConfigProviderInterface;
 use Natalsem\Notification\Api\NotifierInterface;
 use Natalsem\Notification\Model\MessageDataFetcher;
@@ -20,10 +19,10 @@ use Natalsem\Notification\Model\MessageDataFetcher;
  *
  * @package Natalsem\Notification\Observer
  */
-class ShipmentCreatedAfter implements ObserverInterface
+class ShipmentSaveAfter implements ObserverInterface
 {
     /** @var string Event name for shipment creation */
-    public const EVENT_NAME = 'checkout_submit_all_after'; //todo replace with correct name
+    public const EVENT_NAME = 'sales_order_shipment_save_after'; //todo replace with correct name
 
     /** @var string Label for event name */
     public const EVENT_NAME_LABEL = 'Order shipment created';
@@ -69,7 +68,7 @@ class ShipmentCreatedAfter implements ObserverInterface
     {
         /** @var ShipmentInterface $shipment */
         $shipment = $observer->getEvent()->getShipment();
-        $addressId = $shipment->getShippingAddressId();
+        $addressId = (int)$shipment->getShippingAddressId();
         if ($addressId) {
             $message = $this->getMessage($shipment);
             $telephone = $this->dataFetcher->getPhoneNumberByAddressId($addressId);
@@ -94,7 +93,7 @@ class ShipmentCreatedAfter implements ObserverInterface
         $message = str_replace('{ORDER_ID}', $order->getIncrementId(), $message);
         $tracks = $shipment->getTracks();
         foreach ($tracks as $track) {
-            $numbers[] = $track->getTrackNumber();
+            $numbers[] = $track->getTitle() . ': #' . $track->getTrackNumber();
         }
         if (!empty($numbers)) {
             $trackNumbers = implode(', ', $numbers);

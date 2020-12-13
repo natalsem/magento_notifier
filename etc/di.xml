@@ -4,4 +4,24 @@
                 type="Natalsem\Notification\Model\NotificationConfigProvider" />
     <preference for="Natalsem\Notification\Api\NotifierInterface"
                 type="Natalsem\Notification\Model\Notifier" />
+    <preference for="Natalsem\Notification\Api\MessageInterface"
+                type="Natalsem\Notification\Model\Message" />
+    <virtualType name="notifier_log_handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/notifier.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="notifier_logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="object">notifier_log_handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Natalsem\Notification\Model\Notifier">
+        <arguments>
+            <argument name="logger" xsi:type="object">notifier_logger</argument>
+        </arguments>
+    </type>
+
 </config>

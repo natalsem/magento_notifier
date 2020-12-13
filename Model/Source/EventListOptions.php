@@ -25,10 +25,10 @@ class EventListOptions implements OptionSourceInterface
     {
         $optionsArray = [];
         $options = $this->getOptionsArray();
-        foreach ($options as $option) {
+        foreach ($options as $value => $label) {
             $optionsArray[] = [
-                'value' => $option,
-                'label' => __($option),
+                'value' => $value,
+                'label' => __($label),
                 '__disableTmpl' => false
             ];
         }

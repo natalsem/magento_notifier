@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace Natalsem\Notification\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Tests\NamingConvention\true\string;
 use Natalsem\Notification\Api\NotificationConfigProviderInterface;
 
 /**
@@ -36,15 +35,25 @@ class NotificationConfigProvider implements NotificationConfigProviderInterface
     {
         return (bool) $this->scopeConfig->getValue(self::XML_PATH_CONFIG_IS_ACTIVE);
     }
-
-    public function getChannel(): string
+    /**
+     * @return bool
+     */
+    public function isLogActive(): bool
     {
-        return 'viber';
+        return (bool) $this->scopeConfig->getValue(self::XML_PATH_CONFIG_IS_LOG_ACTIVE);
     }
 
-    public function getEventList(): array
+    public function getMethod(): string
     {
-        return $this->scopeConfig->getValue(self::XML_PATH_CONFIG_EVENTS_LIST);
+        return (string) $this->scopeConfig->getValue(self::XML_PATH_CONFIG_GROUP_MESSAGES);
+    }
+
+    public function getEventList()
+    {
+        $list = $this->scopeConfig->getValue(self::XML_PATH_CONFIG_EVENTS_LIST);
+        $arrayList = explode(',', $list);
+
+        return $arrayList;
     }
 
     /**

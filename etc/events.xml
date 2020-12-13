@@ -5,6 +5,6 @@
     </event>
     <event name="sales_order_shipment_save_after">
         <observer name="sales_order_shipment_after"
-                  instance="Company\Module\Observer\SalesOrderShipmentAfter" />
+                  instance="Natalsem\Notification\Observer\ShipmentSaveAfter" />
     </event>
 </config>

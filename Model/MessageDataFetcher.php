@@ -6,9 +6,8 @@ declare(strict_types=1);
 
 namespace Natalsem\Notification\Model;
 
-use Magento\Customer\Api\AddressRepositoryInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Tests\NamingConvention\true\string;
+use Exception;
+use Magento\Sales\Api\OrderAddressRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -19,7 +18,7 @@ use Psr\Log\LoggerInterface;
 class MessageDataFetcher
 {
     /**
-     * @var AddressRepositoryInterface
+     * @var OrderAddressRepositoryInterface
      */
     private $addressRepository;
 
@@ -31,11 +30,11 @@ class MessageDataFetcher
     /**
      * MessageDataFetcher constructor.
      *
-     * @param AddressRepositoryInterface $addressRepository
+     * @param OrderAddressRepositoryInterface $addressRepository
      * @param LoggerInterface $logger
      */
     public function __construct(
-        AddressRepositoryInterface $addressRepository,
+        OrderAddressRepositoryInterface $addressRepository,
         LoggerInterface $logger
     ) {
         $this->addressRepository = $addressRepository;
@@ -53,9 +52,9 @@ class MessageDataFetcher
     {
         $phoneNumber = '';
         try {
-            $address = $this->addressRepository->getById($addressId);
+            $address = $this->addressRepository->get($addressId);
             $phoneNumber = (string) $address->getTelephone();
-        } catch (LocalizedException $e) {
+        } catch (Exception $e) {
             $this->logger->error($e->getMessage());
         }
 

@@ -8,6 +8,7 @@ namespace Natalsem\Notification\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Sales\Api\Data\OrderInterface;
 use Natalsem\Notification\Api\NotificationConfigProviderInterface;
 use Natalsem\Notification\Api\NotifierInterface;
 use Natalsem\Notification\Model\MessageDataFetcher;
@@ -66,12 +67,16 @@ class OrderPlaceAfter implements ObserverInterface
      */
     public function execute(Observer $observer): void
     {
+        /** @var OrderInterface $order */
+        $order = $observer->getEvent()->getOrder();
         $isActive = $this->notificationConfig->isActive();
+        file_put_contents(__DIR__ . '/1.txt', date("H:i:s ") . print_r(1, true) . PHP_EOL, 8);
         $isEventActive = $this->notificationConfig->isEventActive(self::EVENT_NAME);
-        if ($isActive && $isEventActive) {
-            $telephone = $this->dataFetcher->getPhoneNumberByAddressId(1); //todo get from order
+        if ($isActive && $isEventActive && $order) {
+            $addressId = (int) $order->getShippingAddressId();
+            $telephone = $this->dataFetcher->getPhoneNumberByAddressId($addressId);
             if ($telephone) {
-                $orderId = ''; //todo get from event, from order
+                $orderId = $order->getEntityId();
                 $message = $this->notificationConfig->getMessageByEvent(self::EVENT_NAME);
                 $message = str_replace('{ORDER_ID}', $orderId, $message);
                 $this->notifier->sendMessage($message, $telephone);
