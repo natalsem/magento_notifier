@@ -70,7 +70,6 @@ class OrderPlaceAfter implements ObserverInterface
         /** @var OrderInterface $order */
         $order = $observer->getEvent()->getOrder();
         $isActive = $this->notificationConfig->isActive();
-        file_put_contents(__DIR__ . '/1.txt', date("H:i:s ") . print_r(1, true) . PHP_EOL, 8);
         $isEventActive = $this->notificationConfig->isEventActive(self::EVENT_NAME);
         if ($isActive && $isEventActive && $order) {
             $addressId = (int) $order->getShippingAddressId();
